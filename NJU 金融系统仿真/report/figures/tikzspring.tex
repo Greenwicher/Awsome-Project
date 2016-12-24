@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+\usetikzlibrary{calc,patterns,decorations.pathmorphing,decorations.markings}
+\usepackage{verbatim}
+\usepackage{geometry}
+\geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
+\geometry{headheight=2.6cm,headsep=5mm,footskip=13mm}
+
+\begin{document}
+\begin{center}
+\begin{tikzpicture}[M1/.style={rectangle,draw=black,minimum size=2cm,thick}]
+    \tikzstyle{spring}=[thick,decorate,decoration={zigzag,pre length=0.3cm,post length=0.3cm,segment length=5}]
+    \tikzstyle{ground}=[fill,pattern=north east lines,draw=none,minimum width=0.75cm,minimum height=0.3cm]
+    \node [M1] (M1) {};
+    \node (wall1) [ground, minimum width=3cm,yshift=-3cm] {};
+    \draw (wall1.north west) -- (wall1.north east);
+    \draw [spring] (wall1.170) -- ($(M1.south east)!(wall1.170)!(M1.south west)$) node[pos=.5,left] {$k_2$};
+    \draw [spring] (wall1.10) -- ($(M1.south west)!(wall1.10)!(M1.south east)$) node[pos=.5,right] {$k_3$};
+    \node (wall2) [ground, minimum width=3cm,yshift=3cm] {};
+    \draw (wall2.south west) -- (wall2.south east);
+    \draw [spring] (wall2.190) -- ($(M1.north east)!(wall2.170)!(M1.north west)$) node[pos=.5,left] {$k_1$};
+    \draw [-latex,thick] (1.5,0) -- (1.5,1) node [pos=.5,right] {$x$};
+    \filldraw circle (.05) node [pos=.5,below] {\tiny $CG$};
+    \node [rotate=90,above] at (M1.west) {Mass,$m$};
+    \node at (0,-3.5) {(a)};
+\end{tikzpicture}
+\end{center}
+\begin{verbatim}
+\begin{tikzpicture}[M1/.style={rectangle,draw=black,minimum size=2cm,thick}]
+\tikzstyle{spring}=[thick,decorate,decoration={zigzag,pre length=0.3cm,
+      post length=0.3cm,segment length=5}]
+\tikzstyle{ground}=[fill,pattern=north east lines,draw=none,minimum width=0.75cm,
+      minimum height=0.3cm]
+\node [M1] (M1) {};
+\node (wall1) [ground, minimum width=3cm,yshift=-3cm] {};
+\draw (wall1.north west) -- (wall1.north east);
+\draw [spring] (wall1.170) -- ($(M1.south east)!(wall1.170)!(M1.south west)$)
+      node[pos=.5,left] {$k_2$};
+\draw [spring] (wall1.10) -- ($(M1.south west)!(wall1.10)!(M1.south east)$)
+      node[pos=.5,right] {$k_3$};
+\node (wall2) [ground, minimum width=3cm,yshift=3cm] {};
+\draw (wall2.south west) -- (wall2.south east);
+\draw [spring] (wall2.190) -- ($(M1.north east)!(wall2.170)!(M1.north west)$)
+      node[pos=.5,left] {$k_1$};
+\draw [-latex,thick] (1.5,0) -- (1.5,1) node [pos=.5,right] {$x$};
+\filldraw circle (.05) node [pos=.5,below] {\tiny $CG$};
+\node [rotate=90,above] at (M1.west) {Mass,$m$};
+\node at (0,-3.5) {(a)};
+\end{tikzpicture}
+\end{verbatim}
+
+
+\end{document}

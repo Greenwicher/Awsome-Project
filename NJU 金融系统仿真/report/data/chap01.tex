@@ -1,0 +1,90 @@
+\chapter{基本介绍}
+
+\section{数据集}
+
+本文通过互联网收集了两组关于借款人申请贷款的相关信息数据集，其基本介绍见表\ref{tab:dataset}。
+
+\begin{table}[htbp]
+	\centering
+    \caption{\label{tab:dataset}数据集介绍}
+    \begin{tabular}{llll}
+        \toprule
+          数据集来源                      & 数据集名称          & 数据集大小 & 违约比例 \\
+        \midrule
+		  UCI machine learning repository & German Credit       & 1000       & 30\% \\
+		  Kaggle                          & Give me Some Credit & 250,000    & 6.7\% \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{German Credit}
+
+数据集German Credit的每一条记录包含20个特征变量（代表借款人为了从银行借款所提供的个人信息）以及1个分
+类变量（表示最终借款人是否发生了违约）。具体20个特征变量的介绍见表\ref{tab:german}
+
+\begin{table}[htbp]
+	\centering
+	\caption{\label{tab:german}German Credit数据集特征变量介绍}
+	\begin{tabular}{ll}
+		\toprule
+		   特征变量    & 解释 \\
+		\midrule
+		   checking    & status of existing checking account\\
+		   duration    & duration in month\\
+		   history     & credit history \\
+		   purpose     & purpose (e.g. car, furniture, repairs, etc.)\\
+		   amount      & credit amout \\
+		   savings     & savings account/bound \\
+		   employ      & present employment since \\
+		   installment & installment rate in percentage of disposable income \\
+		   status      & personal status and sex \\
+		   others      & debtors/guarantors \\
+		   residence   & present residence since \\
+		   property    & property (e.g. real estate, life insurance, car etc.) \\
+		   age         & age in years \\
+		   otherplans  & other installment plans \\
+		   housing     & housing (e.g. rent, own, for free) \\
+		   cards       & number of existing credits at this bank \\
+		   job         & job types \\
+		   liable      & number of people being liable to provide maintenance for \\
+		   tele        & telephone \\
+		   foreign     & foreign worker \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Give Me Some Credit}
+数据集Give me Some Credit的每一条记录包含10个特征变量（代表借款人为了从银行借款所提供的个人信息）以及1个分
+类变量（表示最终借款人是否发生了违约）。具体10个特征变量的介绍见表\ref{tab:kaggle}
+
+\begin{table}[htbp]
+	\centering
+	\caption{\label{tab:kaggle}Give me Some Credit数据集特征变量介绍}
+	\begin{tabular}{ll}
+		\toprule
+		   特征变量                              & 解释 \\
+		\midrule
+            RevolvingUtilizationOfUnsecuredLines & Total balance on credit cards and personal lines \\
+		                                         & of credit except real estate and no installment debt\\
+												 & like car loans divided by the sum of credit limits\\
+	        Age                                  & Age of borrower in years\\
+			NumberOfTime30-69DaysPastDueNotWorse & Number of times borrower has been 30-59 days past\\
+			                                     &  due but no worse in the last 2 years\\
+			DebtRatio                            & Monthly debt payments, alimony, living costs divided \\
+			                                     & by monthly gross income\\
+			MonthlyIncome                        & Monthly income \\
+			NumberOfOpenCreditLinesAndLoans      & Number of Open loans (installment like car loan \\
+			                                     &  or mortgage and) and Lines of credit (e.g. credit cards)\\
+		    NumberOfTimes90DaysLate              & Number of times borrower has been 90 days or more \\
+			                                     &  past due \\
+			NumberRealEstateLoansOrLines         & Number of mortgage and real estate loans including \\
+			                                     &  home equity lines of credit \\
+			NumberOfTime60-89DaysPastDueNotWorse & Number of times borrower has been 60-89 days past \\
+			                                     &  due but no worse in the last 2 years \\
+			NumberOfDependents                   & Number of dependents in family excluding themselves \\
+			                                     & (spouse, children etc.) \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+

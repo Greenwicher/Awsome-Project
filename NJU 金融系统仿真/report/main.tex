@@ -1,0 +1,34 @@
+%# -*- coding: utf-8 -*-
+%%采用 xelatex + ctex 文档类
+\documentclass[fancyhdr,fntef,UTF8,oneside,12pt,a4paper, winfonts]{ctexbook}
+\input{data/name.tex}
+\input{data/preamble.tex}
+\input{data/abstract_format.tex}
+\input{data/cover.tex}
+
+\begin{document}
+\maketitle
+\frontmatter
+\normalfont
+\input{data/abstract.tex}
+\pdfbookmark[0]{目录}{tableofcontents}
+\tableofcontents
+%\listoffigures
+%\listoftables  这条命令是表格目录，需要的话可以启用；上面那条是图片目录，不需要可以注释掉或者直接删除
+
+\mainmatter
+\zihao{-4}
+\song
+\include{data/chap01}
+\include{data/chap02}
+\include{data/chap03}
+\include{data/chap04}
+
+%\backmatter
+%\pagenumbering{Roman}
+% 参考文献
+%\bibliographystyle{unsrt}
+%\bibliography{ref/reference}
+%\addcontentsline{toc}{chapter}{参考文献}
+
+\end{document}

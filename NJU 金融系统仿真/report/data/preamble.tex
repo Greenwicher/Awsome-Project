@@ -1,0 +1,123 @@
+%% 下一行说明请见： http://goo.gl/vqz7ps
+%\usepackage{fontspec,xunicode,xltxtra}
+
+%% 下一行说明请见：http://goo.gl/tVfJGd
+%\usepackage{xeCJK}
+
+%% 字体设置
+\setCJKfamilyfont{song}{SimSun}
+\setCJKfamilyfont{zhongsong}{STZhongsong}
+%\setCJKfamilyfont{kai}{KaiTi}
+\setCJKfamilyfont{kai}{KaiTi_GB2312}
+\setCJKfamilyfont{hei}{SimHei}
+\setCJKfamilyfont{fs}{FangSong_GB2312}
+\setCJKfamilyfont{li}{LiSu}
+\setCJKfamilyfont{yy}{YouYuan}
+\newcommand{\song}{\CJKfamily{song}}
+\newcommand{\zs}{\CJKfamily{zhongsong}}
+\newcommand{\kai}{\CJKfamily{kai}}
+\newcommand{\hei}{\CJKfamily{hei}}
+\newcommand{\fs}{\CJKfamily{fs}}
+\newcommand{\li}{\CJKfamily{li}}
+\newcommand{\yy}{\CJKfamily{yy}}
+\setmainfont{Times New Roman} %英文字体使用Times New Roman
+%\setmainfont[SmallCapsFont=LMRomanCaps10]{Times New Roman}
+%Times New Roman 字体不包括 Small Caps 形状，如果要使用，需设定 Small Caps 字体，如 LMRomanCaps10
+
+\renewcommand{\ULthickness}{0.7pt}
+\newcommand{\myuline}[2]      {\uline{\makebox[#1]{#2}}}
+\newcommand{\NJUTunderline}[1]{\uline{\hfill{#1}\hfill}}
+\footnotesep=10pt
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{array}
+\usepackage{booktabs,multirow,colortbl,longtable}
+\usepackage{verbatim}
+\usepackage{lipsum}
+\usepackage{comment}
+\usepackage{footnpag}
+%\usepackage{mathrsfs}
+\usepackage{multirow}
+
+%% 加载图形宏包
+\usepackage{graphicx}
+%% 设置图片目录
+\graphicspath{{figures/}}
+\usepackage[config]{subfig}
+\usepackage{indentfirst}
+%% 紧凑的列表环境
+\usepackage[neverdecrease]{paralist}
+\let\itemize\compactitem
+\let\enditemize\endcompactitem
+\let\enumerate\compactenum
+\let\endenumerate\endcompactenum
+\let\description\compactdesc
+\let\enddescription\endcompactdesc
+
+\usepackage[margin=10pt, font=small, labelfont=bf, labelsep=quad]{caption}
+%%设置浮动体（表格、图片）标题格式
+%\DeclareCaptionLabelFormat{nju}{{\zihao{5}\song #1~#2}}
+%\DeclareCaptionLabelSeparator{nju}{\hspace{1em}}
+%\DeclareCaptionFont{nju}{\zihao{5}\song}
+%\captionsetup{labelformat=nju,labelsep=nju,font=nju}
+%\captionsetup[table]{position=top,belowskip={12bp-\intextsep},aboveskip=6bp}
+%\captionsetup[figure]{position=bottom,belowskip={12bp-\intextsep},aboveskip=6bp}
+
+%% 超链接、目录
+\usepackage{hyperref}
+\usepackage{xcolor}
+\definecolor{darkblue}{rgb}{0,0,0.55}
+\hypersetup{CJKbookmarks,bookmarksnumbered,%
+			colorlinks,unicode=true,%
+			linkcolor=black,%
+			citecolor=darkblue,%
+			plainpages=false,%
+			bookmarksopen=true,%
+			bookmarksopenlevel=1,
+			pdfstartview=FitH,
+			pdftitle={\thesistitle},
+			pdfauthor={\myname},
+			pdfcreator={XeLaTeX with NJUThesis template designed by pkuphy},}
+\usepackage{tabularx}%只要把tabularx包的引用放到hyperref包之后，正文脚注编号就能正常生成超链接。
+%%版面控制
+\usepackage{geometry}
+\geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
+%\geometry{headheight=2.6cm,headsep=5mm,footskip=13mm}
+\parskip 0.5ex plus 0.25ex minus 0.25ex
+
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.65}
+\renewcommand{\floatpagefraction}{0.60}
+
+
+\fancypagestyle{myfancy}{%
+\fancyhf{}
+\fancyhead[C]{\small \song\leftmark}
+\fancyfoot[C]{\small \thepage}
+\renewcommand{\headrulewidth}{0.7pt}
+}
+\pagestyle{myfancy}
+\setlength{\headheight}{13.6pt}
+
+
+\setcounter{secnumdepth}{3}%%自动编号到 subsubsection
+
+\CTEXsetup[nameformat={\hei\zihao{-2}}]{chapter}
+\CTEXsetup[titleformat={\hei\zihao{-2}}]{chapter}
+\CTEXsetup[beforeskip={-20pt}]{chapter}
+\CTEXsetup[afterskip={20pt}]{chapter}
+\CTEXsetup[format={\hei\zihao{-3}}]{section}
+\CTEXsetup[nameformat={\bf\hei\zihao{-3}}]{section}
+\CTEXsetup[beforeskip={-3ex plus -1ex minus -.2ex}]{section}
+\CTEXsetup[afterskip={1.0ex plus .2ex}]{section}
+\CTEXsetup[format={\hei\zihao{-4}}]{subsection}
+\CTEXsetup[nameformat={\bf\hei\zihao{-4}}]{subsection}
+\CTEXsetup[beforeskip={-2.5ex plus -1ex minus -.2ex}]{subsection}
+\CTEXsetup[afterskip={1.0ex plus .2ex}]{subsection}
+\CTEXoptions[contentsname={目\qquad 录}]
+\CTEXoptions[listfigurename={插\qquad 图}]
+\CTEXoptions[listtablename={表\qquad 格}]
+
+%% 中文破折号，来自清华模板
+\newcommand{\pozhehao}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}

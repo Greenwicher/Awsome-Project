@@ -1,0 +1,13 @@
+\documentclass[10pt]{article}
+\usepackage{chemfig}
+\usepackage[active,tightpage]{preview}
+\begin{document}
+%\begin{preview}
+%\chemfig{H_2N-C(<[::+90]H)(-[::-90]CH_2-[::0]*6(=-=-=-))<:C(=[::+90]O)%
+%-\chemabove{N}{H}-C(<[::+90]H)(-[::-90]CH_2-[::0]*6(=-=-=-))<:C(=[::+90]O)-OH}
+%\end{preview}
+\begin{preview}\setatomsep{2em}
+\chemfig{H_2N-[,1]CH(-[::-90]CH_2-[::0]*6(=-=-=-))-C(=[::+90]O)%
+-NH-CH(-[::-90]CH_2-[::0]*6(=-=-=-))-C(=[::+90]O)-OH}
+\end{preview}
+\end{document}

@@ -1,0 +1,25 @@
+\newenvironment{abstract}{
+\thispagestyle{plain}
+\pagenumbering{Roman}
+\pdfbookmark[0]{中文摘要}{abstract}
+\begin{center}
+{\bf\kai\zihao{-2} \uuline{南~京~大~学~金~融~系~统~仿~真~学~期~报~告}}
+\end{center}
+\bigskip
+
+\noindent
+\begin{minipage}{\textwidth}
+\kai\zihao{4}%
+\noindent{学期报告题目：}\NJUTunderline{\thesistitle}\\
+\NJUTunderline{\department}{院系}\NJUTunderline{\major}{专业}
+\NJUTunderline{\enteryear}{级本科生}\hfill{姓名：}\NJUTunderline{\myname}\\
+{指导教师：}\uline{\hfill\advisor\quad\advisorjob\hfill}
+\end{minipage}
+
+\vskip 1cm
+\begin{center}
+{\heiti\zihao{-3} 摘\quad 要}
+\end{center}\par
+\kai\zihao{-4}
+}{}
+\newcommand\keywords[1]{\vspace{2ex}\noindent{\hei 关键词：} {\kai #1}}
