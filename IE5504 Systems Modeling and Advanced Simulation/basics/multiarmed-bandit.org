@@ -1,0 +1,109 @@
+#+TITLE: Multi-armed Bandit Problem Summary
+#+AUTHOR: LIU Weizhi
+#+DATE: <2014-09-12 Fri>
+#+EMAIL: weizhiliu@nus.edu.sg
+#+KEYWORDS: multiarmed bandit problem, optimal computing budget allocation, simulation optimization
+#+OPTIONS: toc:t author:t email:t
+
+* Multi-armed Bandit Problem
+** Input
+*** Definition
+    1. Multiarmed-Bandit Problem
+       You are supposed to *decide which order to play, how many times to play* for K slot machines with *diffirent reward/loss distribution for each* in order to *maximize your final reward* in *limited times*.
+    2. Regret
+       The expected difference between the reward sum associated with an optimal strategy and the sum of the collected rewards
+    3. Online/Offline Algorithm
+       "In computer science, an online algorithm is one that can process its input piece by piece in a serial fashion, i.e., in the order that the input is fed to the algorithm, without having the entire input available from the start. In contrast, offline algorithm is given the whole problem data from the begin and is required to output an answer which solves the problem at hand."[fn:online-algorithm]
+*** Variations
+**** Reward Generation
+     1. Bernoulli multi-armed bandit (reward ~ Bernoulli)
+     2. Restless bandit problem (reward ~ Markov machine)
+**** Contextual
+**** Expert Opinions
+*** Bandit Strategies
+**** Optimal solutions
+**** Approximate solutions
+***** Semi-uniform strategies
+****** Epsilon-greedy strategy
+****** Epsilon-first strategy
+****** Epsilon-decreasing strategy
+****** Adaptive epsilon-greedy strategy based on value differences
+****** Contextual-Epsilon-greedy strategy
+***** Probability matching strategies (Thompson sampling / Bayesian Bandits)
+****** Algorithm #<<Bayesian Bandits Algorithm Description>>
+       1. Sample the selection probabilities for all bandit
+       2. Select the bandit with largest selection probability
+       3. Observe the result of pulling this bandit, and update your prior on this bandit.
+       4. return to 1
+***** Pricing strategies
+***** Strategies with ethical constranits
+*** Applications
+    1. Clinical trials
+    2. Adaptive routing
+    3. Online Advertisement
+*** Useful Resources
+** Process
+*** Why is this problem hard to solve?
+      + Your resources are limited which means you have to effectively utilize your every try.
+      + You are facing stochastic reward which means risk and profit.
+      + You are supposed to *analyze history performance* of each slot machine to guide *your next try*.
+        + Scenairo 1 - simulation times are small (not significant statistically)
+          + On the one hand, slot machine performed best may get lucky or there might be much better alternative to be explored.
+          + On the other hand, those with bad performance may get unlucky which means statistically, they might give you more reward in the future.
+          + *You might need more tries to evaluate the variance of reward for each slot machine.*
+        + Scenairo 2- simulation times are large (significant statistically for some slot machine)
+          + If you insist on those with statistically significant reward slot machine, you might loss the opportunity to explore a better alternative.
+          + Nevertheless, you have to bear with risk when you try to explore those slot machine with statistically insignificant reward.
+          + *exploration and exploitation dilemma*
+        + Conclusion
+          + exploration in Scenairo 1
+          + exploiation in Scenairo 2
+          + Should we treat the relationship between exploration and exploiation in a absolutely discrete case or mixture case with preference in different time?
+            + Discrete Case
+            + Mixture Case
+*** How to transform the search process from exploration to exploiation based on the history performance?
+      [[http://www.feynmanlectures.info/exercises/Feynmans_restaurant_problem.html][Feynman's restaurant problem]]
+** Output
+*** Bandit Strategies
+**** Bayesian Bandits
+***** Simple case with bernoulli multi-armed bandit [fn:simple-bayesian-bandits]
+****** Assumption
+       1. There are K bandits with each's reward obeys Bernoulli(p_{k}) distribution
+       2. The initial prior distribution of each p_{k} is Uniform[0,1]
+****** Algorithm
+       please see [[Bayesian Bandits Algorithm Description][here]].
+****** Analyze
+       1. The initial priors are Beta(\alpha = 1, \beta = 1)(a uniform distribution), and the observed reward R (0 or 1) is Binomial, the posterior is a Beta(\alpha = 1 + R, \beta = 1 + 1 - R). (please see [[http://en.wikipedia.org/wiki/Conjugate_prior#Discrete_distributions][Conjugate prior]])
+          + Conjugate prior
+            According to Bayesian formula $$P(\theta|X) = \frac{P(X|\theta) P(\theta)}{P(X)}$$, if we can find a prior $P(\theta)$ and likelihood function $P(X|\theta)$ such that the formula of prior $P(\theta)$ and $P(\theta|X)$ has the same distribution (with different parameteres), then  $P(\theta)$ and likelihood function $P(X|\theta)$ are called conjugate.
+       2. Evaluation of strategy performance
+          + Total Regret of a strategy
+            $$ Regret = T p^{*} - \sum_{t=1}^{n} R_{i,t}$$
+          + Expected total regret (Bound for any sub-optimal strategy's expected regret)
+            $$ E[Regret] = \Omega(\log (T))$$
+*** IE5504 Project
+**** Research Proposal
+***** Problem
+      + Maximize your reward with limited tries given K slot machines whose reward distribution obeys Bernoulli distribution with different p_{k}.
+***** Strategy
+      0. Initialize the success rate for all bandits and generate a success/failure (1/0) sequence with length n for each bandit.
+      1. Calculate the APCS (Approximate Probability of Correct Selection [fn:apcs]) of all bandits based on their prior distribution.
+      2. Find the bandit B with highest APCS (if not unique, then uniformly randomly choose a bandit)
+      3. Observe the reward of bandit B
+      4. Update the posterior distribution of bandit B
+      5. Stop if tries run out otherwise return to 1
+***** Evaluation
+      1. Pseudo Regret (given R_{i,t} for all i and t)
+         $$ Pseudo \ Regret = \max_{i} \sum_{t=1}^{n} R_{i,t} - \sum_{t=1}^{n} R_{I_{t}, t}$$ where $I_{t}$ is the bandit selected at time $t$.
+***** Todo
+      1. Simulation Pattern - Batch simulation or Sequence simulation
+      2. Selection criteria - [[http://en.wikipedia.org/wiki/Stochastic_ordering][Stochastic Ordering]] ([[http://artax.karlin.mff.cuni.cz/r-help/library/PCS/html/PCS-package.html][Probability of correct selection]] - allocation rule [fn:pcs-allocation]) or Sample Ordering (The largest sample) or Probability of correct selection for each bandit
+      3. 2 * 2 experiments according to different scenairo of simulation pattern and selection criteria
+      4. Apart from bayesian bandit, find more strategy to solve this multi-armed bandit problem.
+      5. Visualization of posterior distribution against simulation time
+      6. Combination of markov decision process
+* Footnotes
+[fn:simple-bayesian-bandits] Please refer to this website http://camdp.com/blogs/multi-armed-bandits
+[fn:apcs] Please refer to *Stochastic Simulation Optimization - An Optimal Computing Budget Allocation* P37
+[fn:online-algorithm] Please refer to http://en.wikipedia.org/wiki/Online_algorithm
+[fn:pcs-allocation] Please refer to *Stochastic Simulation Optimization - An Optimal Computing Budget Allocation* P46

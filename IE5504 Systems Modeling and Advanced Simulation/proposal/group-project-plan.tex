@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{authblk}
+\usepackage{enumerate}
+\usepackage{booktabs}
+\usepackage{amsmath, amssymb}
+\usepackage{multirow}
+\usepackage{color}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClassID\ (\hmwkClassInstructor)} % Top center header
+\rhead{\hmwkTitle} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Group Project Plan} % Assignment title
+\newcommand{\hmwkClassID}{IE5504} % Course/class
+\newcommand{\hmwkClassName}{Systems Modeling and Advanced Simulation} % Course/class
+\newcommand{\hmwkClassInstructor}{Prof. Lee Loo Hay} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{LIU Weizhi} % Your name
+\newcommand{\hmwkAuthorEmail}{weizhiliu2009@gmail.com} % Your email
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClassID \ - \hmwkClassName}}\\
+\textmd{\textbf{\hmwkTitle}}\\
+\vspace{0.1in}\large{\textit{supervisor: \hmwkClassInstructor}}\\
+\vspace{1in}
+\textmd{\textbf{Group Member:} \\ \vspace{0.2in} Li Qingxuan, Li Yue, Liu Weizhi,\\ Wong Manyu, Yuan yuhe}
+\vspace{1.5in}
+}
+
+\author{\textbf{\hmwkAuthorName} \thanks{\hmwkAuthorEmail}}
+\affil{Department of Industrial \& Systems Engineering \\ National University of Singapore}
+\date{\today} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+% \newpage
+% \tableofcontents
+% \newpage
+
+\newpage
+
+\section{Introduction}
+We intend to investigate the multi-armed bandit problem which can be formulated as below: \\
+\textbf{Maximize your total reward $R$ with at most $n$ trials given $K$ slot machines (bandit) whose reward distribution is quite different.}\\
+\\
+This problem is very similiar to what OCBA are supposed to solve. Treat the slot machines as possible designs and the amount of tries as computing resources. \textbf{Consequently, we are very interesed in comparing the performance of OCBA and traditional methods to solve multi-armed bandit problem and figure out the reason why they might perform differently.}\\
+\\
+To ease the problem without loss of generality for multi-armed bandit problem, we assume the reward of slot machine $k$ obeys Bernoulli distribution $p_{k}$. Therefore, the conjugate distribution is Beta distribution.
+\section{Strategy}
+We propose two preliminary approaches to solve the problem described as section 1. More detailed algorithms will be developed further. 
+\subsection{Bayesian Bandit}
+The process of Bayesian bandit algorithm is as follow:
+\begin{enumerate}
+  \item Initialize the Bernoulli success rate for all bandits and generate a success/failure (1/0) sequence with length $n$ for each bandit. (Pseudo Random)
+  \item Calculate the APCS (Approximate Probability of Correct Selection \footnote{please refer to \textbf{Stochastic Simulation Optimization - An Optimal Computing Budget Allocation}, P37} or Stochastic Ordering) of all bandits based on their prior distribution.
+  \item Find the bandit B with highest APCS (if not unique, then uniformly randomly choose a bandit)
+  \item Observe the reward of bandit B from the given sequence
+  \item Update the posterior distribution of bandit B
+  \item  Stop if total number of trials run out otherwise return to step 2
+\end{enumerate}
+\subsection{Optimal Computing Budget Allocation}
+The process of Optimal Computing Budget Allocation is as follow:
+\begin{enumerate}
+  \item Initialize the Bernoulli success rate for all bandits and generate a success/failure (1/0) sequence with length $n$ for each bandit.
+  \item For each bandit, initially try $N_{0}$ times and calculate their corresponding mean and variance
+  \item Find the bandit B with highest mean as the best bandit in the initial period.
+  \item Allocate the number of trials to different bandit according to the allocation rule \footnote{please refer to the allocation rule at \textbf{Stochastic Simulation Optimization - An Optimal Computing Budget Allocation}, P46} in order to maximize the probability of correct selection.
+  \item Try the bandit for respective allocated nums and then calculated the mean and variance for each bandit.
+  \item Stop if total number of trials run out otherwise return to step 3
+\end{enumerate}
+\section{Evaluation}
+We adopt the Pseudo Regret as a performance measure for the algorithm to find the optimal bandit.
+$$ Pseudo \ Regret = \max_{i} \sum_{t=1}^{n} R_{i,t} - \sum_{t=1}^{n} R_{I_{t}, t}$$ where $I_{t}$ is the bandit selected at time $t$.
+\section{Extension}
+If time is enough, some general scenarios could be considered
+\begin{itemize}
+  \item Find more strategies to solve the multi-armed bandit problem and make comparisions.
+  \item Integration of markov decision process to solve multi-armed bandit problem.
+  \item Modify the reward distribution to more relastic distributions.
+\end{itemize}
+\end{document}
