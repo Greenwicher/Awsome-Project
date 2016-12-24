@@ -1,0 +1,19 @@
+﻿{% extends "base_admin.html" %}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-10 col-md-offset-1">
+<div class="panel panel-default">		  
+		  <div class="panel-heading"><h2>目前共有{{customer_list | length}}名注册账户</h2></div>
+		  <table class="table">
+		    <tr><td>用户ID</td><td>用户名</td><td>邮箱</td><td>性别</td><td>地址</td><td>总消费（元）</td></tr>
+		    {% for customer in customer_list %}
+				<tr><td>{{customer.c_id}}</td><td><a href="{{customer.c_id}}/" name='name' value='{{custome.c_name}}'>{{customer.c_name}}</a></td><td>{{customer.c_email}}</td><td>{{customer.c_sex}}</td><td>{{customer.c_address}}</td><td>{{customer.c_expense}}</td></tr>
+			{% endfor %}
+		  </table>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

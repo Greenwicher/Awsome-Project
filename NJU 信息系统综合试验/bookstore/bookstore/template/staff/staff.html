@@ -1,0 +1,62 @@
+﻿{% extends "base_admin.html" %}
+{% load myfilter %}
+{% block content %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="row" >
+	      <div class="col-md-4">
+		  </div>
+		  <div class="col-md-4">
+		    <center>
+		    <h1>TinyCute</h1>
+			<form action="" method="get">
+		    <div class="input-group">
+              <input type="text" class="form-control" placeholder="请输入您要搜索的图书名称" name="book_search">
+	          <span class="input-group-btn">
+                <button type="submit" class="btn btn-default" >搜!</button>
+              </span>
+            </div><!-- /input-group -->
+			</form>
+			<h2>想你所想，搜你所搜</h2>
+			</center>
+	     </div>
+		 <div class="col-md-4">
+		 </div>
+      </div>
+	  {% if book_search %}
+		<div class="panel panel-default">
+		  <div class="panel-heading">符合您搜索要求的有{{book_search_result | length}}本书{% if not book_search_result %}，是否需要<a href="{% url 'bookstore.views.customer_recommend' %}">荐购图书</a>{% endif %}</div>
+		  <table class="table">
+		    <tr><td>ISBN</td><td>图书名称</td><td>作者</td><td>出版商</td><td>出版日期</td><td>价格（元）</td><td>库存数量</td></tr>
+		    {% for book in book_search_result %}
+				<tr><td>{{book.b_isbn}}</td><td>{{book.b_name}}</td><td>{{book.b_author}}</td><td>{{book.b_publisher}}</td><td>{{book.b_date | date:"Y年n月j日" }}</td><td>{{book.b_price}}</td><td>{{stock|key:book.b_isbn}}</td></tr>
+			{% endfor %}
+		  </table>
+		</div>
+	  
+	  {% endif %}
+    </div>
+	<div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>最新图书</h2>
+		  {% for book in new_book_list%}
+			<p>{{book.b_name}}</p>
+		  {% endfor %}
+        </div>
+        <div class="col-md-4">
+          <h2>最热图书</h2>
+          {% for book in hot_book_list%}
+			<p>{{book.b_name}}</p>
+		  {% endfor %}    
+       </div>
+        <div class="col-md-4">
+          <h2>店长推荐</h2>
+          {% for book in recommend_book_list%}
+			<p>{{book.b_name}}</p>
+		  {% endfor %}    
+        </div>
+    </div>
+{% endblock %}
+

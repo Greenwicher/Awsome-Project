@@ -1,0 +1,42 @@
+﻿{% extends 'base_admin.html'%}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-4 col-md-offset-4">
+      <center>
+	    <h2>采购部 供应商管理</h2>
+	  </center>  
+		<form action="" method="post" name="supplier">
+		{% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入供应商名称" name="name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入供应商表现（1~10分）" name="score">
+          </div>
+		  <center>
+          <button type="submit" class="btn btn-default" name="submit">提交</button>	  
+		  </center>
+		</form>
+	  {% if post %}
+	    <center>
+		  <h2><center>恭喜您供应商添加成功！</center></h2>
+		</center>
+	  {% endif %}
+</div>
+<div class="col-md-8 col-md-offset-2">	  
+<div class="panel panel-default">		  
+		  <div class="panel-heading">目前共有{{supplier_list | length}}名供应商</div>
+		  <table class="table">
+		    <tr><td>供应商ID</td><td>供应商名称</td><td>供应商表现（1~10分）</td></tr>
+		    {% for supplier in supplier_list %}
+				<tr><td>{{supplier.s_id}}</td><td>{{supplier.s_name}}</td><td>{{supplier.s_score}}</td></tr>
+			{% endfor %}
+		  </table>
+</div>		  
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

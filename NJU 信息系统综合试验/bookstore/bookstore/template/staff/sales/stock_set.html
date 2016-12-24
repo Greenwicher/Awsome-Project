@@ -1,0 +1,20 @@
+﻿{% extends "base_admin.html" %}
+{% load myfilter %}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-8 col-md-offset-2">
+<div class="panel panel-default">
+		  <div class="panel-heading"><h2>销售部-库存查询</h2></div>
+		  <table class="table">
+		    <tr><td>图书ISBN</td><td>图书名称</td><td>库存量</td></tr>
+		    {% for stock in stock_list %}
+				{% ifequal stock.sl_stock 0%}<tr class="table warning">{% else %}<tr>{% endifequal %}
+				<td>{{stock.b_isbn}}</td><td>{{book|key:stock.b_isbn}}</td><td>{{stock.sl_stock}}</td></tr>
+			{% endfor %}
+		  </table>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

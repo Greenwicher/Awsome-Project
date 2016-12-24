@@ -1,0 +1,32 @@
+﻿{% extends "base_admin.html" %}
+{% load myfilter %}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-10 col-md-offset-1">
+
+<span class="label label-success"><a href="{% url 'bookstore.views.staff_sales_order_stockin'%}">有货单</a></span>
+<span class="label label-danger"><a href="{% url 'bookstore.views.staff_sales_order_stockout'%}">缺货单</a></span>
+<span class="label label-info"><a href="{% url 'bookstore.views.staff_sales_order_purchase'%}">采购中</a></span>
+<span class="label label-default"><a href="{% url 'bookstore.views.staff_sales_order_finished'%}">历史订单</a></span>
+<span class="label label-default"><a href="{% url 'bookstore.views.staff_sales_order_out'%}">出货单</a></span>
+
+<div class="panel panel-default">
+		  <table class="table">
+		    <tr><td>订单ID</td><td>用户ID</td><td>图书ISBN</td><td>{% if type|strequal:'已出库' %}出库单日期{% else %}顾客订单日期{% endif %}</td><td>{% if type|strequal:'已出库' %}出货数量{% else %}购买数量{% endif %}</td><td>销售价格（元）</td><td>状态</td></tr>
+		    {% for foo in order %}
+				{% if type|strequal:'已完成'%}<tr class="table success">{% endif %}
+				{% if type|strequal:'有货'%}<tr class="table warning">{% endif %}
+				{% if type|strequal:'缺货'%}<tr class="table warning">{% endif %}
+				{% if type|strequal:'采购中'%}<tr class="table warning">{% endif %}
+				{% if type|strequal:'已出库'%}<tr class="table success">{% endif %}
+				<td>{{foo.co_id}}</td><td>{{foo.c_id}}</td><td>{{foo|isbn}}</td><td>{{foo|order_date|date:'Y-m-d'}}</td><td>{{foo.co_amount}}</td><td>{{foo.b_price}}</td><td>{{type}}</td></tr>
+			{% endfor %}
+			
+		  </table>
+</div>
+<button type="button" class="btn btn-default"><a href="{% url 'bookstore.views.staff_sales_order_process'%}">处理</a></button>
+</div>
+</div>
+</div>
+{% endblock %}

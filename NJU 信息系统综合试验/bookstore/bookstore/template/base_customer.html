@@ -1,0 +1,66 @@
+﻿{% load myfilter %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+    <!-- Bootstrap core CSS -->
+    <link href="/../static/css/bootstrap.css" rel="stylesheet">
+	<link href="/../static/css/custom.css" rel="stylesheet">
+	{% block title %}
+         <title>小可爱书店 | TinyCute BookStore</title>
+	{% endblock %}
+  </head>
+
+  <body>
+
+  {% block navbar %}
+  {% endblock %}
+  
+  {% block content %}
+  {% endblock %}
+  
+  {% block booklist %}
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>最新图书</h2>
+		  {% for book in new_book_list%}
+			<p>{{book.b_name}}</p>
+		  {% endfor %}
+        </div>
+        <div class="col-md-4">
+          <h2>最热图书</h2>
+          {% for book in hot_book_list%}
+			<p>{{book.b_name}}</p>
+		  {% endfor %}    
+       </div>
+        <div class="col-md-4">
+          <h2>店长推荐</h2>
+          {% for book in recommend_book_list%}
+			<p>{{book.b_name}}</p>
+		  {% endfor %}    
+        </div>
+      </div>
+   {% endblock %}
+   {% block footer %}
+      <hr>
+
+      <footer>
+        <center>
+          <p>&copy; TinyCute BookStore 2014 | 书，就是要可爱的！</p>
+        </center>
+      </footer>
+    </div> <!-- /container -->
+  {% endblock %}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/../static/js/jquery-2.1.0.js"></script>
+    <script src="/../static/js/bootstrap.js"></script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+﻿{% extends "base_admin.html" %}
+{% load myfilter %}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-8 col-md-offset-2">
+      <center>
+	    <h2>财务部 库存帐</h2>
+	  </center>  
+<div class="panel panel-default">		  
+		  <div class="panel-heading">目前共有{{stock_list | length}}种图书</div>
+		  <table class="table">
+		    <tr><td>库存帐ID</td><td>图书ISBN</td><td>图书名称</td><td>总入库数</td><td>总出库数</td><td>总库存数</td></tr>
+		    {% for stock in stock_list %}
+				{% ifequal stock.sl_stock 0 %}<tr class="table warning">{% else %}<tr>{% endifequal %}
+				<td>{{stock.sl_id}}</td><td>{{stock.b_isbn}}</td><td>{{book|key:stock.b_isbn}}</td><td>{{stock.sl_in_all}}</td><td>{{stock.sl_out_all}}</td><td>{{stock.sl_stock}}</td></tr>
+			{% endfor %}
+		  </table>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

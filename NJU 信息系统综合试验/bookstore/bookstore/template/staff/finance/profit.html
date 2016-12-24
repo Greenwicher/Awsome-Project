@@ -1,0 +1,26 @@
+﻿{% extends "base_admin.html" %}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-6 col-md-offset-3">
+      <center>
+	    <h2>财务部 收支表</h2>
+	  </center>  
+<div class="panel panel-default">		  
+		  <div class="panel-heading">目前记录了{{profit_list | length}}天收支情况</div>		 
+		  <div class="panel-heading"><center>总收入：{{total_revenue}}元</center></div>
+		  <div class="panel-heading"><center>总支出：{{total_cost}}元</center></div>
+		  <div class="panel-heading"><center>总利润：{{total_profit}}元</center></div>
+		  
+		  <table class="table">
+		    <tr><td>收支ID</td><td>记录日期</td><td>当日收入（元）</td><td>当日支出（元）</td><td>当日利润（元）</td></tr>
+		    {% for profit in profit_list %}
+				<tr><td>{{profit.f_id}}</td><td>{{profit.f_date|date:'Y-m-d'}}</td><td>{{profit.f_revenue}}</td><td>{{profit.f_cost}}</td><td>{{profit.f_profit}}</td></tr>
+			{% endfor %}
+		  </table>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

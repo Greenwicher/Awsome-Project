@@ -1,0 +1,112 @@
+﻿{% load myfilter %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+    <!-- Bootstrap core CSS -->
+    <link href="/../static/css/bootstrap.css" rel="stylesheet">
+	<link href="/../static/css/custom.css" rel="stylesheet">
+	{% block title %}
+         <title>小可爱书店 | TinyCute BookStore</title>
+	{% endblock %}
+  </head>
+
+  <body>
+
+  {% block navbar %}
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'bookstore.views.staff' %}">小可爱书店 | TinyCute BookStore</a>
+        </div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+	  {% if request.user.username|staff:'purchase' %}
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">采购部<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'bookstore.views.staff_purchase_order_unfinished'%}">采购订单处理</a></li>
+		  <li><a href="{% url 'bookstore.views.staff_purchase_supplier'%}">供应商信息管理</a></li>
+		  <li><a href="{% url 'bookstore.views.staff_purchase_strategy'%}">策略补货处理</a></li>
+        </ul>
+      </li>
+	  {% endif %}
+	  {% if request.user.username|staff:'sales' %}
+	  <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">销售部<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'bookstore.views.staff_sales_order_stockout'%}">顾客订单处理</a></li>
+		  <li><a href="{% url 'bookstore.views.staff_sales_profile'%}">客户信息管理</a></li>
+          <li><a href="{% url 'bookstore.views.staff_sales_stock'%}">图书库存查询</a></li>
+        </ul>
+      </li>
+	  {% endif %}
+	  {% if request.user.username|staff:'finance' %}
+	  <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">财务部<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'bookstore.views.staff_finance_stock' %}">库存帐</a></li>
+          <li><a href="{% url 'bookstore.views.staff_finance_profit' %}">收支表</a></li>
+		  <li><a href="{% url 'bookstore.views.staff_finance_analysis_quantity'%}">统计分析</a></li>
+        </ul>
+      </li>
+	  {% endif %}
+	  {% if request.user.username %} 
+	  <li><a href="#">欢迎光临，{{request.user.username}}！</a></li>
+	  {% endif %}	
+    </ul>
+	{% if not request.user.username %}
+	<form class="navbar-form navbar-right" role="form">
+	{% csrf_token %}
+            <div class="form-group">
+              <input type="text" placeholder="邮箱" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="密码" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">登陆</button>
+			<button type="submit" class="btn btn-success">注册</button>
+     </form>
+	{% endif %}
+	{% if request.user.username %} 
+	<form class="navbar-form navbar-right" role="form" action="/logout/">
+			<button type="submit" class="btn btn-success" action="/logout/">退出</button>
+    </form>
+	{% endif %}
+  </div><!-- /.navbar-collapse -->
+
+      </div>
+    </div>
+  {% endblock %}
+  
+  
+  {% block content %}
+  {% endblock %}
+  
+  
+  {% block footer %}
+  <hr>
+      <footer>
+        <center>
+          <p>&copy; TinyCute BookStore 2014 | 书，就是要可爱的！</p>
+        </center>
+      </footer>
+  {% endblock %}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/../static/js/jquery-2.1.0.js"></script>
+    <script src="/../static/js/bootstrap.js"></script>
+  </body>
+</html>

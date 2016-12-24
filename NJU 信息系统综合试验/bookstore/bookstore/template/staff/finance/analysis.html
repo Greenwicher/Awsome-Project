@@ -1,0 +1,46 @@
+﻿{% extends 'base_admin.html'%}
+{% load myfilter %}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-8 col-md-offset-2">
+<span class="label label-success"><a href="{% url 'bookstore.views.staff_finance_analysis_quantity'%}">销量统计</a></span>
+<span class="label label-success"><a href="{% url 'bookstore.views.staff_finance_analysis_revenue'%}">销额统计</a></span>
+
+<div class="panel panel-default">
+		  <div class="panel-heading">{{type}}前10图书</div>
+		  <table class="table">
+		    <tr><td>图书ISBN</td><td>图书名称</td><td>总{{type}}</td></tr>
+		    {% for foo in top %}
+				<tr><td>{{foo.b_isbn}}</td><td>{{book|key:foo.b_isbn}}</td><td>{% if type|strequal:'销量'%}{{foo.sl_out_all}}{% else %}{{revenue|key:foo.b_isbn}}{% endif %}</td></tr>
+			{% endfor %}
+		  </table>
+</div>
+
+<div class="panel panel-default">
+		  <div class="panel-heading">{{type}}后10图书</div>
+		  <table class="table">
+		    <tr><td>图书ISBN</td><td>图书名称</td><td>总{{type}}</td></tr>
+			{% for foo in bottom %}
+			  {% if type|strequal:'销量'%}
+				{% ifequal foo.sl_out_all 0 %}
+				  <tr class="table warning">
+				{% else %}
+				  </tr>
+				{% endifequal %}
+			  {% else %}
+			    {% ifequal revenue|key:foo.b_isbn 0%}
+				  <tr class="table warning">
+				{% else %}
+				  </tr>
+				{% endifequal %}
+			  {% endif %}
+				<td>{{foo.b_isbn}}</td><td>{{book|key:foo.b_isbn}}</td><td>{% if type|strequal:'销量'%}{{foo.sl_out_all}}{% else %}{{revenue|key:foo.b_isbn}}{% endif %}</td></tr>
+			{% endfor %}
+		  </table>
+</div>
+
+</div>
+</div>
+</div>
+{% endblock %}

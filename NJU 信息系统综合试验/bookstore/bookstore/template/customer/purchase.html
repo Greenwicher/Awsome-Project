@@ -1,0 +1,42 @@
+﻿{% extends "index.html" %}
+{% load myfilter %}
+{% block content %}
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+	{% if request.user.username %}
+	  <center>
+	    <h2>TinyCute 图书购买</h2>
+	  </center> 
+		<form action="" method="post" name="book_buy">
+		{% csrf_token %}
+		  {% if search %}
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{isbn}}" name="isbn" value="{{isbn}}">
+          </div>	
+          {% else %}		  
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入图书ISBN" name="isbn">
+          </div>
+          {% endif %}		  
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入购买数量" name="amount">
+          </div>		  
+          <button type="submit" class="btn btn-default" name="submit">提交</button>	  
+		</form>
+	  {% if post %}
+	    {% if book_exist %}
+	      <h2>{% if stock %}恭喜您，购书订单提交成功！{% else %} 抱歉，您购买的图书库存不够，我们已将您的订单记录下来，请等候1~2个工作日。{% endif %}请问是否要查询<a href="{% url 'bookstore.views.customer_order_unfinished'%}">图书订单状态</a></h2>
+	    {% else %}
+	    <h2>抱歉，TinyCute没有您要购买的书。请问是否要<a href="{% url 'bookstore.views.customer_recommend' %}">荐购图书</a>。</h2>
+	    {% endif %}
+	  {% endif %}
+	  {% else %}
+	  <center>
+        <h2>请您先登录！</h2>
+      </center>		
+	  {% endif %}
+	</div>
+  </div>
+</div>
+{% endblock %}

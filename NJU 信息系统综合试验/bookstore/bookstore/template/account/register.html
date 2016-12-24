@@ -1,0 +1,41 @@
+﻿{% extends "index.html" %}
+{% block content %}
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+	  <center>
+	    <h2>TinyCute 用户注册</h2>
+	  </center>
+	  {% if not register %}    
+		<form action="" method="post" name="register">
+		{% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入您的用户名" name="name">
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="请输入您的邮箱" name="email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="请输入您的密码" name="password">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入您的性别" name="sex">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入您的地址" name="address">
+          </div>		  
+          <button type="submit" class="btn btn-default" name="submit">提交</button>	  
+		</form>
+	  {% else %}
+	    <center>
+	      <h2>恭喜您注册成功！</h2>
+	    </center>
+	  {% endif %}
+	</div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block booklist %}
+{% endblock %}

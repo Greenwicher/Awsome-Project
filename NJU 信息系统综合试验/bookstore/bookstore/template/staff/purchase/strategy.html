@@ -1,0 +1,27 @@
+﻿{% extends 'base_admin.html'%}
+{% load myfilter %}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-8 col-md-offset-2">
+      <center>
+	    <h2>采购部 策略补货</h2>
+	  </center>  
+<div class="panel panel-default">		  
+		  <div class="panel-heading">{% if post %}恭喜您，策略补货采购单已下单！{% else %}目前共有{{strategy_list | length}}类书需要补货{% endif %}</div>
+		  {% if not post %}
+		  <table class="table">
+		    <tr><td>图书ISBN</td><td>图书名称</td><td>库存量</td><td>安全库存</td><td>波动量</td><td>经济批量</td><td>均需求量</td></tr>
+		    {% for strategy in strategy_list %}
+				{% ifequal strategy.sl_stock 0%}<tr class="table warning">{% else %}<tr>{% endifequal %}
+				<td>{{strategy.b_isbn}}</td><td>{{book_stockout|key:strategy.b_isbn}}</td><td>{{strategy.sl_stock}}</td><td>{{safety_stock|key:strategy.b_isbn}}</td><td>{{std|key:strategy.b_isbn}}</td><td>{{order_quantity|key:strategy.b_isbn}}</td><td>{{mean|key:strategy.b_isbn}}</td></tr>
+			{% endfor %}
+		  </table>
+		  {% endif %}
+</div>
+{%if not post%}{% ifequal weekday 4%}<button type="button" class="btn btn-default"><a href="process">确认采购</a></button>{% else%}未到规定处理日（每周星期五），不得处理。{%endifequal%}{%endif%}
+</div>
+</div>
+</div>
+
+{% endblock %}

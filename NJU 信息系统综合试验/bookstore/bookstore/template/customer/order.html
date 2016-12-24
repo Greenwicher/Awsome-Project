@@ -1,0 +1,25 @@
+﻿{% extends 'index.html'%}
+{% load myfilter %}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-10 col-md-offset-1">
+<span class="label label-danger"><a href="{% url 'bookstore.views.customer_order_unfinished'%}">未完成订单</a></span>
+<span class="label label-success"><a href="{% url 'bookstore.views.customer_order_finished'%}">已完成订单</a></span>
+
+<div class="panel panel-default">
+		  <div class="panel-heading">目前共有{{order_list | length}}条记录</div>
+		  <table class="table">
+		    <tr><td>订购单ID</td><td>订购日期</td><td>图书名称</td><td>购买数量</td><td>单价（元）</td><td>状态</td></tr>
+		    {% for foo in order_list %}
+				{% if type|key:foo.co_id|strequal:'采购中'%}<tr class="table warning">{% endif %}
+				{% if type|key:foo.co_id|strequal:'已完成'%}<tr class="table success">{% endif %}
+				{% if type|key:foo.co_id|strequal:'未处理'%}<tr class="table warning">{% endif %}
+				<td>{{foo.co_id}}</td><td>{{foo.co_date|date:'Y-m-d'}}</td><td>{{foo.b_isbn.b_name}}</td><td>{{foo.co_amount}}</td><td>{{foo.b_price}}</td><td>{{type|key:foo.co_id}}</td></tr>
+			{% endfor %}
+		  </table>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+﻿{% extends "index.html" %}
+{% block content %}
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+	  {% if request.user.username %}
+	  <center>
+	    <h2>TinyCute 图书荐购</h2>
+	  </center> 
+      {% if not flag %}	  
+		<form action="" method="post" name="book">
+		{% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入图书ISBN" name="isbn">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入图书名称" name="name">
+          </div>		 
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入图书作者" name="author">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入图书出版商" name="publisher">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入图书出版日期" name="date">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入图书价格" name="price">
+          </div>		  
+          <button type="submit" class="btn btn-default" name="submit">提交</button>	  
+		</form>
+	  {% else %}
+	    <center>
+		  <h2>恭喜您荐购成功！</h2>
+		</center>
+	  {% endif %}
+	  {% else %}
+	    <center>
+	    <h2>请您先登录！</h2>	
+		</center>
+	  {% endif %}
+	</div>
+  </div>
+</div>
+{% endblock %}

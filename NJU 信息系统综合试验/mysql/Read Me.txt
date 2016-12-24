@@ -1,0 +1,4 @@
+## initialization.sql
+该文件是数据库bookstore中各个数据表建立的初始化sql脚本，其中为完成django的admin模块，还需在cmd中运行"python manage.py syncdb"
+## bookstore.sql
+包含目前bookstore数据库中各种表的定义以及存储的数据

@@ -1,0 +1,50 @@
+﻿{% extends "index.html" %}
+{% block content %}
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+	  {% if request.user.username %}
+	  <center>
+	    <h2>{{request.user.username}}的个人信息</h2>
+	  </center>  
+      {% if not flag %}	  
+		<form action="" method="post" name="book">
+		{% csrf_token %}
+          <div class="input-group">
+		    <span class="input-group-btn">
+              <button type="text" class="btn btn-default" >邮箱</button>
+            </span>
+            <input type="text" class="form-control" value="{{profile.c_email}}" name="email" >
+          </div>		 
+          <div class="input-group">
+		    <span class="input-group-btn">
+              <button type="text" class="btn btn-default" >性别</button>
+            </span>		  
+            <input type="text" class="form-control" value="{{profile.c_sex}}" name="sex">
+          </div>
+          <div class="input-group">
+		    <span class="input-group-btn">
+              <button type="text" class="btn btn-default" >地址</button>
+            </span>		  
+            <input type="text" class="form-control" value="{{profile.c_address}}" name="address">
+          </div>
+		  <center>
+          <button type="submit" class="btn btn-default" name="submit">修改</button>	  
+		  </center>
+		</form>
+	  {% else %}
+	    <center>
+		  <h2>恭喜您基本信息修改成功！</h2>
+		</center>
+	  {% endif %}
+	  {% else %}
+	    <center>
+	    <h2>请您先登录！</h2>	
+		</center>
+	  {% endif %}
+	</div>
+  </div>
+</div>
+{% endblock %}
+{% block booklist %}
+{% endblock %}

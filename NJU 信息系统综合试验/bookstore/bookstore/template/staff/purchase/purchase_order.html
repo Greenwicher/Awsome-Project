@@ -1,0 +1,26 @@
+﻿{% extends 'base_admin.html'%}
+{% load myfilter %}
+{% block content %}
+<div class="jumbotron">
+<div class="row" >
+<div class="col-md-10 col-md-offset-1">
+<span class="label label-danger"><a href="{% url 'bookstore.views.staff_purchase_order_unfinished'%}">未处理订单</a></span>
+<span class="label label-default"><a href="{% url 'bookstore.views.staff_purchase_order_finished'%}">已处理订单</a></span>
+<span class="label label-default"><a href="{% url 'bookstore.views.staff_purchase_order_in'%}">入库单</a></span>
+
+<div class="panel panel-default">
+		  <table class="table">
+		    <tr><td>采购单ID</td><td>供应商ID</td><td>图书ISBN</td><td>{% if type|strequal:'已入库' %}入库单日期{% else %}采购单日期{% endif %}</td><td>{% if type|strequal:'已入库' %}入库数量{% else %}采购数量{% endif %}</td><td>采购价格（元）</td><td>状态</td></tr>
+		    {% for foo in order_list %}
+				{% if type|strequal:'未处理'%}<tr class="table warning">{% endif %}
+				{% if type|strequal:'已处理'%}<tr class="table success">{% endif %}
+				{% if type|strequal:'已入库'%}<tr class="table success">{% endif %}
+				<td>{{foo.po_id}}</td><td>{{foo.s_id}}</td><td>{{foo|isbn}}</td><td>{{foo|order_date|date:'Y-m-d'}}</td><td>{{foo.po_amount}}</td><td>{{foo.po_price}}</td><td>{{type}}</td></tr>
+			{% endfor %}
+		  </table>
+</div>
+{% ifequal weekday 4%}<button type="button" class="btn btn-default"><a href="{% url 'bookstore.views.staff_purchase_order_process'%}">处理</a></button>{% else %}未到规定处理日（每周星期五），不得处理。{% endifequal %}
+</div>
+</div>
+</div>
+{% endblock %}
