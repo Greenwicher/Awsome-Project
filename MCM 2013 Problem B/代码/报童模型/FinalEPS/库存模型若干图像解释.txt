@@ -1,0 +1,15 @@
+******************Target Function**********************
+
+ We use the matlab symbolic compution method to compute the expected total cost of every possibel order quantity. 
+ From the figure,  the best order quantiy of 84.1 trillion m^3 is apparent.
+
+******************MonteCarloSimDemand******************
+
+ We generate 500 random downstream's water demand of Three Geogres which is a Gauss Distribution (mean=1152 standard deviation=440) 
+ and then compute the total cost given the optimal order quantity 84.1 trillion m^3. 
+
+
+*****************Sensitivity************************
+
+ By changing the stock-out cost and holding cost with -20%~20%(就是那两个成本变化+-20%)， we then compute the 相应的 optimal water order quantity. 
+Then we compute the expected total cost for each case.  图中三条红线的交点为原始最优订水量（就是84.1 trillion）

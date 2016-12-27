@@ -1,0 +1,7 @@
+syms r;
+q = 841;
+f1 = c*(q-r)*1/(stdev*sqrt(2*pi))*exp(-(r-mean)*(r-mean)/(2*stdev*stdev));
+f2 =s*(r-q)*1/(stdev*sqrt(2*pi))*exp(-(r-mean)*(r-mean)/(2*stdev*stdev));
+tc = int(c*(q-r)*1/(stdev*sqrt(2*pi))*exp(-(r-mean)*(r-mean)/(2*stdev*stdev)), r, 0, q)+...
+        int(s*(r-q(i))*1/(stdev*sqrt(2*pi))*exp(-(r-mean)*(r-mean)/(2*stdev*stdev)), r, q(i), inf);
+

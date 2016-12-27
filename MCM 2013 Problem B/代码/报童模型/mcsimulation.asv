@@ -1,0 +1,10 @@
+clc; clear all; close all;
+
+mean = 1152;
+stdev = 440;
+s = 0.005344;
+c = 0.022243;
+optimal = 841;
+
+r0 = randn(1, 1000);
+r = r0*stdev+mean;

@@ -1,0 +1,35 @@
+******************蓄水库存模型**********************
+strength: 
+1. Newsvendor Model for reservior can generate the minimal expected total cost which can help decision makers to better fit future uncertainty.
+2. We use the data of unit water's economic contribution to local GDP in the upstream and downstream of Three Gorges Dam as holding cost and stock-out cost which both addresses fairness among different provinces and take local government's main performance indicator GDP.
+
+weakness:
+1. The model dosen't consider the factors of environment and society which are also important as economic factor.
+2. The model require nearly accurate probability distribution of downstream's water demand.
+
+sensitivity analysis
+考虑 c/s的波动，具体见图像
+
+***************海水淡化厂投资模型**********************
+strength：
+1. The model can estimate a long run social benefits for constructions of water-desalination factories.
+2. It's much easier to make decisions by comparing different plans' NPV.
+
+weakness:
+1. The model doesn't consider other water supply means like water transfer and water reuse.
+2. Lacking of the accurate data, we take some provinces' water gap data into modeling rather than cities which may incomparable.
+3. Some more specific costs may not be added.
+
+sensitivity analysis
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+3*F
++MC*(exp(CL+log(PL))+exp(CM+log(MC/(1-a/b*(PL-MC)/PL)))+exp(CH+log(MC/(1-a/c*(PL-MC)/PL))))
+
+-3*PL*exp(CL+log(PL))
+
+-2*(exp(CM+log(MC/(1-a/b*(PL-MC)/PL)))-exp(CL+log(PL)))*MC/(1-a/b*(PL-MC)/PL)
+
+-(exp(1.5+log(2/(1-0.1/0.7*(PL-2)/PL)))-exp(2+log(2/(1-0.1/0.4*(PL-2)/PL))))*MC/(1-a/c*(PL-MC)/PL)
+
+
+QL=exp(CL+log(PL))
+QM=exp(CM+log(MC/(1-a/b*(PL-MC)/PL)))
+QH=exp(CH+log(MC/(1-a/c*(PL-MC)/PL)))
+PM=MC/(1-a/b*(PL-MC)/PL)
+PH=MC/(1-a/c*(PL-MC)/PL)
+
+function = 
+3*F
++MC*(exp(CL+log(PL))+exp(CM+log(MC/(1-a/b*(PL-MC)/PL)))+exp(CH+log(MC/(1-a/c*(PL-MC)/PL))))
+-3*exp(CL+log(PL))*PL
+-2*(exp(CM+log(MC/(1-a/b*(PL-MC)/PL)))-exp(CL+log(PL)))*MC/(1-a/b*(PL-MC)/PL)
+-(exp(CH+log(MC/(1-a/c*(PL-MC)/PL)))-exp(CM+log(MC/(1-a/b*(PL-MC)/PL))))*MC/(1-a/c*(PL-MC)/PL)
