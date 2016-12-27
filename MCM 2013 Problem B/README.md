@@ -8,4 +8,4 @@
 - Interplay between four strategies is analyzed, namely whether they are substitutes or complements in terms of water demand uncertainty and area properties.
 - The [paper](http://www.cnki.com.cn/Article/CJFDTotal-QXYY2013Z2011.htm) is published in the Mathematical Modeling and its Applications, Volume 2, 2013
 
-![](http://greenwicher.qiniudn.com/Outstanding Winner Certificate MCM 2013.pdf)
+![](http://greenwicher.qiniudn.com/Outstanding Winner Certificate MCM 2013.jpg)
