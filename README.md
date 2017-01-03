@@ -9,3 +9,4 @@
 + **NJU 金融系统仿真**: implementation of several machine learning methods including logistic regression, classification tree methods, and random forests to forcest the credit scoring 
 + **NJU 信息系统综合实验**: developed a demo of e-commerce bookstore website including both customer and adminstrator part based on Danjo
 + **MCM 2013 Problem B**: proposed four rigorous mathematical models to mitigate the water scarcity issue in China, and we have won the Outstanding Winner (0.2%) and the INFORMS Prize Award (0.05%) in the Mathematical Contest in Modeling, 2013
++ **Codeforces Guide**: a simple guide on how to solve codeforces problems based on the data retrieved from codeforce.com
